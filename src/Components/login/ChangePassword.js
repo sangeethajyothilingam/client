@@ -66,7 +66,7 @@ function ChangePassword() {
     onSubmit: async (values) => {
       try {
         const register = await axios.post(
-          `${config.api}/users/updatepassword/:id"${input.email}`,
+          `${config.api}/updatepassword/:id"${input.email}`,
           values
         );
         alert(register.data.message);

@@ -11,7 +11,7 @@ function AnswerCard({ data }) {
     setLoading(true);
     setvotes((data.votes = data.votes + 1));
     try {
-      await axios.put(`${config.api}/link/addvotes/${data._id}`, data, {
+      await axios.put(`${config.api}/addVotes/${data._id}`, data, {
         headers: {
           Authorization: `${localStorage.getItem("react_token")}`,
         },
@@ -24,7 +24,7 @@ function AnswerCard({ data }) {
     <div className="card">
       <div className="card-body">
         <h5 className="card-title">{data.answer}</h5>
-        <p className="card-text">PostedBy: {data.username}</p>
+
         <div className="d-flex justify-content-around">
           <div className="d-flex justify-content-start">
             <button

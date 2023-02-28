@@ -11,7 +11,7 @@ function Dashboard() {
     fetchData();
   }, []);
   let fetchData = async () => {
-    let userData = await axios.get(`${config.api}/link/question`);
+    let userData = await axios.get(`${config.api}/questions`);
     userContextData.setquestions(userData.data);
   };
   return (

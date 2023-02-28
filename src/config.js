@@ -1,1 +1,1 @@
-export const config = { api: "https://localhost:4000" };
+export const config = { api: "http://localhost:4000" };

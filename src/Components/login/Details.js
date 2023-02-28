@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 
 import UserContext from "../../context/UserContext";
 
-function Profile() {
+function Details() {
   const userContextData = useContext(UserContext);
-
+  console.log(userContextData.LoginPerson);
   return (
     <div className="d-flex justify-content-center">
       <div class="card" style={{ width: "25rem" }}>
@@ -43,4 +43,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default Details;

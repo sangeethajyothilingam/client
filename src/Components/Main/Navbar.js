@@ -10,6 +10,7 @@ import { faHome, faSearch, faSignOut } from "@fortawesome/free-solid-svg-icons";
 function Navbar() {
   const userContextData = useContext(UserContext);
   const navigate = useNavigate();
+  const name = localStorage.getItem("userName");
   const Home = () => {
     navigate("/Portal/Dashboard");
   };
@@ -23,22 +24,19 @@ function Navbar() {
       if (values) {
         try {
           const key = values.keyword;
-          let userData = await axios.get(
-            `${config.api}/link/questions/${key}`,
-            {
-              headers: {
-                Authenticate: `${localStorage.getItem("react_token")}`,
-              },
-            }
-          );
+          let userData = await axios.get(`${config.api}/questions/${key}`, {
+            headers: {
+              Authorization: `${localStorage.getItem("react_token")}`,
+            },
+          });
           userContextData.setquestions(userData.data);
         } catch (error) {
           console.log(error);
         }
       } else {
-        let userData = await axios.get(`${config.api}/link/questions`, {
+        let userData = await axios.get(`${config.api}/questions`, {
           headers: {
-            Authenticate: `${localStorage.getItem("react_token")}`,
+            Authorization: `${localStorage.getItem("react_token")}`,
           },
         });
         userContextData.setquestions(userData.data);
@@ -52,12 +50,13 @@ function Navbar() {
 
   const fetchData = async () => {
     try {
-      let userData = await axios.get(`${config.api}/user/userDetails`, {
+      let userData = await axios.get(`${config.api}/userDetails`, {
         headers: {
-          Authenticate: `${localStorage.getItem("react_token")}`,
+          Authorization: `${localStorage.getItem("react_token")}`,
         },
       });
       userContextData.setLoginPerson(userData.data);
+      console.log(userData.data);
     } catch (error) {
       console.log(error);
     }
@@ -81,7 +80,7 @@ function Navbar() {
     >
       <div className="col-lg-4 ml-2">
         <button className="btn navbar-brand col px-md-4" onClick={() => Home()}>
-          <FontAwesomeIcon icon={faHome} color={"orange"} />
+          <FontAwesomeIcon icon={faHome} color={"red"} />
           Stack <b>overflow</b>
         </button>
         <button
@@ -125,13 +124,13 @@ function Navbar() {
         >
           <div className="navbar-nav">
             <div className="nav-item nav-link" href="#">
-              Welcome <b>{userContextData.LoginPerson.username}</b>
+              Welcome <b>{name}</b>
             </div>
-            <Link to="/Portal/Profile" className="btn btn-info m-2">
-              View Profile
+            <Link to="/Portal/Details" className="btn btn-success">
+              View userDetails
             </Link>
             <button
-              className="btn btn-outline-danger m-2"
+              className="btn btn-warning"
               onClick={() => {
                 doLogout();
               }}

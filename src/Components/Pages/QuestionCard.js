@@ -11,13 +11,13 @@ function QuestionCard({ data }) {
     fetchData();
   }, []);
   let fetchData = async () => {
-    let userData = await axios.get(`${config.api}/link/getAnswers/${data._id}`);
+    let userData = await axios.get(`${config.api}/getAnswers/${data._id}`);
     setlen(userData.data.length);
   };
   const handleView = async (data) => {
     data.view = data.view + 1;
     try {
-      await axios.put(`${config.api}/link/addView${data._id}`, data, {
+      await axios.put(`${config.api}/addView/${data._id}`, data, {
         headers: {
           Authorization: `${localStorage.getItem("react_token")}`,
         },
@@ -32,14 +32,11 @@ function QuestionCard({ data }) {
     <div className="card">
       <div className="card-body">
         <h5 className="card-title">{data.question}</h5>
-        <p className="card-text">PostedBy: {data.username}</p>
+
         <p className="card-text">Related to: {data.topic}</p>
         <div className="d-flex justify-content-around">
           <div className="d-flex justify-content-start">
-            <button
-              onClick={() => handleView(data)}
-              className="btn btn-info mr-1"
-            >
+            <button onClick={() => handleView(data)} className="btn btn-danger">
               View Answers
             </button>
           </div>

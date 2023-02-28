@@ -60,7 +60,7 @@ function CreateAccount() {
     onSubmit: async (values) => {
       try {
         const createaccount = await axios.post(
-          `${config.api}/user/createaccount`,
+          `${config.api}/createaccount`,
           values
         );
         alert(createaccount.data.message);

@@ -15,11 +15,11 @@ function Login() {
     },
     onSubmit: async (values) => {
       try {
-        let login = await axios.post(`${config.api}/user/login`, values);
+        let login = await axios.post(`${config.api}/login`, values);
         if (login.data.token) {
           localStorage.setItem("react_token", login.data.token);
-          localStorage.setItem("email", login.data.email);
-          userContextData.setLoginPerson(login.data.email);
+          localStorage.setItem("userName", login.data.name);
+          userContextData.setLoginPerson(login.data.name);
           navigate("/Portal/Dashboard");
         } else {
           alert(login.data.message);
@@ -60,10 +60,10 @@ function Login() {
                         <input
                           type={"text"}
                           className="form-control form-control-user mb-2"
-                          name={"email"}
-                          value={formik.values.email}
+                          name={"username"}
+                          value={formik.values.username}
                           onChange={formik.handleChange}
-                          placeholder="Enter Email..."
+                          placeholder="Enter User Name..."
                         />
                       </div>
                       <div className="form-group">

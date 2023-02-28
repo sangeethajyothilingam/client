@@ -26,15 +26,11 @@ function Askquestion() {
     },
     onSubmit: async (values) => {
       try {
-        const question = await axios.post(
-          `${config.api}/link/Askquestion`,
-          values,
-          {
-            headers: {
-              Authenticate: `${localStorage.getItem("react_token")}`,
-            },
-          }
-        );
+        const question = await axios.post(`${config.api}/Askquestion`, values, {
+          headers: {
+            Authorization: `${localStorage.getItem("react_token")}`,
+          },
+        });
         alert(question.data.message);
         navigate("/Portal/Dashboard/");
       } catch (error) {

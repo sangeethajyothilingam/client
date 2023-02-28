@@ -16,9 +16,7 @@ function Answers() {
   }, []);
 
   let fetchData = async () => {
-    let userData = await axios.get(
-      `${config.api}/link/getAnswers/${quesid.id}`
-    );
+    let userData = await axios.get(`${config.api}/getAnswers/${quesid.id}`);
     userContextData.setanswers(userData.data);
   };
 
@@ -38,11 +36,11 @@ function Answers() {
     onSubmit: async (values) => {
       try {
         const question = await axios.post(
-          `${config.api}/link/postAnswer/${quesid.id}`,
+          `${config.api}/postAnswer/${quesid.id}`,
           values,
           {
             headers: {
-              Authenticate: `${localStorage.getItem("react_token")}`,
+              Authorization: `${localStorage.getItem("react_token")}`,
             },
           }
         );
