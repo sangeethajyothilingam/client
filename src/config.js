@@ -1,1 +1,2 @@
-export const config = { api: "http://localhost:4000" };
+export const config = { api: "https://nodejs-backend-8nyt.onrender.com" };
+//http://localhost:4000
